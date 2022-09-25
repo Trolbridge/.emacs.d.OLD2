@@ -79,10 +79,10 @@
 ;; -CheckVer
 
 ;; BetterGC
-(defvar better-gc-cons-threshold 134217728 ; 128mb
-  "The default value to use for `gc-cons-threshold'.
+;;;;(defvar better-gc-cons-threshold 134217728 ; 128mb
+;;;;  "The default value to use for `gc-cons-threshold'.
 
-If you experience freezing, decrease this.  If you experience stuttering, increase this.")
+;;;;If you experience freezing, decrease this.  If you experience stuttering, increase this.")
 
 ;;;;(add-hook 'emacs-startup-hook
 ;;;;          (lambda ()
@@ -112,30 +112,32 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; -AutoGC
 
 ;; LoadPath
-;;;;(defun update-to-load-path (folder)
-;;;;  "Update FOLDER and its subdirectories to `load-path'."
-;;;;  (let ((base folder))
-;;;;    (unless (member base load-path)
-;;;;      (add-to-list 'load-path base))
-;;;;    (dolist (f (directory-files base))
-;;;;      (let ((name (concat base "/" f)))
-;;;;        (when (and (file-directory-p name)
-;;;;                   (not (equal f ".."))
-;;;;                   (not (equal f ".")))
-;;;;          (unless (member base load-path)
-;;;;            (add-to-list 'load-path name)))))))
+(defun update-to-load-path (folder)
+  "Update FOLDER and its subdirectories to `load-path'."
+  (let ((base folder))
+    (unless (member base load-path)
+      (add-to-list 'load-path base))
+    (dolist (f (directory-files base))
+      (let ((name (concat base "/" f)))
+        (when (and (file-directory-p name)
+                   (not (equal f ".."))
+                   (not (equal f ".")))
+          (unless (member base load-path)
+            (add-to-list 'load-path name)))))))
 
-;;;;(update-to-load-path (expand-file-name "elisp" user-emacs-directory))
+(update-to-load-path (expand-file-name "elisp" user-emacs-directory))
 ;; -LoadPath
 
 ;; Constants
 
-;;;;(require 'init-const)
+(require 'init-const)
 
+
+(require 'init-exec-path-from-shell)
 ;; Packages
 
 ;; Package Management
-;;;;(require 'init-package)
+(require 'init-package)
 
 ;; Global Functionalities
 ;;;;(require 'init-global-config)
