@@ -3,3 +3,4 @@ early-init.el
 eln-cache
 elpa
 .last-package-update-day
+.*.swp
