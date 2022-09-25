@@ -34,27 +34,55 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (setq inhibit-startup-message t)
+  (setq visible-bell t)
+
+  (scroll-bar-mode -1)	; Disable visible scrollbar
+  (tool-bar-mode -1)	; Disable the toolbar
+  (tooltip-mode -1)	; Disable tooltips
+  (set-fringe-mode 10)	; Give some breathing room
+
+  (menu-bar-mode -1)	; Disable the menu bar
+
+;;;;(use-package doom-themes
+;;;;  :ensure t
+;;;;  :config
+  ;; Global settings (defaults)
+;;;;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;;;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;;;  (load-theme 'doom-palenight t)
+
+  ;; Enable flashing mode-line on errors
+;;;;  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+;;;;  (doom-themes-neotree-config)
+  ;; or for treemacs users
+;;;;  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+;;;;  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+;;;;  (doom-themes-org-config))
 
 ;; CheckVer
-;;;;(cond ((version< emacs-version "26.1")
-;;;;       (warn "M-EMACS requires Emacs 26.1 and above!"))
-;;;;      ((let* ((early-init-f (expand-file-name "early-init.el" user-emacs-directory))
-;;;;              (early-init-do-not-edit-d (expand-file-name "early-init-do-not-edit/" user-emacs-directory))
-;;;;              (early-init-do-not-edit-f (expand-file-name "early-init.el" early-init-do-not-edit-d)))
-;;;;         (and (version< emacs-version "27")
-;;;;              (or (not (file-exists-p early-init-do-not-edit-f))
-;;;;                  (file-newer-than-file-p early-init-f early-init-do-not-edit-f)))
-;;;;         (make-directory early-init-do-not-edit-d t)
-;;;;         (copy-file early-init-f early-init-do-not-edit-f t t t t)
-;;;;         (add-to-list 'load-path early-init-do-not-edit-d)
-;;;;         (require 'early-init))))
+(cond ((version< emacs-version "26.1")
+       (warn "M-EMACS requires Emacs 26.1 and above!"))
+      ((let* ((early-init-f (expand-file-name "early-init.el" user-emacs-directory))
+              (early-init-do-not-edit-d (expand-file-name "early-init-do-not-edit/" user-emacs-directory))
+              (early-init-do-not-edit-f (expand-file-name "early-init.el" early-init-do-not-edit-d)))
+         (and (version< emacs-version "27")
+              (or (not (file-exists-p early-init-do-not-edit-f))
+                  (file-newer-than-file-p early-init-f early-init-do-not-edit-f)))
+         (make-directory early-init-do-not-edit-d t)
+         (copy-file early-init-f early-init-do-not-edit-f t t t t)
+         (add-to-list 'load-path early-init-do-not-edit-d)
+         (require 'early-init))))
 ;; -CheckVer
 
 ;; BetterGC
-;;;;(defvar better-gc-cons-threshold 134217728 ; 128mb
-;;;;  "The default value to use for `gc-cons-threshold'.
+(defvar better-gc-cons-threshold 134217728 ; 128mb
+  "The default value to use for `gc-cons-threshold'.
 
-;;;;If you experience freezing, decrease this.  If you experience stuttering, increase this.")
+If you experience freezing, decrease this.  If you experience stuttering, increase this.")
 
 ;;;;(add-hook 'emacs-startup-hook
 ;;;;          (lambda ()
